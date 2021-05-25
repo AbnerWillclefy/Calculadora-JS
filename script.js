@@ -51,19 +51,21 @@ function calcAction () {
         total = processCalc(total, current, action)
     }
 
+    //accum.innerHTML=""
     result.innerHTML = total.toString().substring(0, maxWidth)
     count = []
 }
 
 function generateResult() {
-    if(accum[accum.length - 1] === "=" && result.length > 0) {
-        result.innerHTML = processCalc(Number(result), Number(result), savedAction).toString().substring(0, maxWidth)
+    currentAccum = accum.innerHTML
+    if(currentAccum[currentAccum.length - 1] === "=" && result.innerHTML.length > 0) {
+        result.innerHTML = processCalc(Number(result.innerHTML), Number(result.innerHTML), savedAction).toString().substring(0, maxWidth)
     }
 
     if(count.length === 0) {return }
 
     count.push(Number(result.innerHTML))
-    accum.innerHTML += `${result.innerHTML}`
+    accum.innerHTML += `${result.innerHTML} = `
 
     calcAction()
 }
